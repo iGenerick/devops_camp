@@ -1,0 +1,5 @@
+---
+imageName: "kind-registry:5000/webserver"
+imageTag: latest
+replicaCount: 3
+author: "Сергей Андреевич Н."

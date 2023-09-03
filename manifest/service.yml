@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver
+  namespace: webserver-namespace
+  labels:
+    app: webserver
+spec:
+  ports:
+  - name: http
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  type: ClusterIP
+  selector:
+    app: webserver
