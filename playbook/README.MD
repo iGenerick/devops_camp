@@ -15,7 +15,11 @@
 
 ### Установка
 
+```
+git clone https://github.com/iGenerick/devops_camp.git
 
+cd devops_camp/playbook
+```
 
 ### Запуск
 
