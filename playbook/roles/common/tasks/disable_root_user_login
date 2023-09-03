@@ -1,0 +1,27 @@
+---
+- name: find all sshd configs
+  become: yes
+  ansible.builtin.find:
+    paths: "/etc/ssh/sshd_config.d"
+    file_type: file
+    use_regex: true
+    recurse: yes
+  register: sshd_configs
+
+- name: remove PermitRootLogin if present
+  become: yes
+  lineinfile:
+    path: "{{ item.path }}"
+    # Игнорируем закоментированные строки. Остальные удаляем.
+    regex: "(?i)^(?!#).*PermitRootLogin.*"
+    state: absent
+  loop: "{{ sshd_configs.files + [{'path': '/etc/ssh/sshd_config'}] }}"
+  notify: restart sshd
+
+- name: disable Root Login thru ssh
+  become: yes
+  lineinfile:
+    path: /etc/ssh/sshd_config.d/00-PermitRootLogin.conf
+    create: yes
+    line: PermitRootLogin no
+    mode: '0600'

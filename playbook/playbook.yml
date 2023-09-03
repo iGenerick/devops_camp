@@ -1,0 +1,8 @@
+---
+#   применяем стандартные настройки хостов.
+
+- name: apply common configuration to hosts
+  hosts: "{{ hosts_group }}"
+  
+  roles: 
+    - common

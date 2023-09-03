@@ -1,0 +1,3 @@
+ansible_user: "{{ testserver_user }}"
+ansible_password: "{{  testserver_password }}"
+ansible_become_password: "{{  testserver_password }}"

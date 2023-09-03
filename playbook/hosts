@@ -1,0 +1,6 @@
+[test_ubuntu_2204]
+#192.168.31.125
+192.168.181.82
+
+[testservers:children]
+test_ubuntu_2204

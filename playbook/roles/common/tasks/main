@@ -1,0 +1,8 @@
+---
+- name: install ssh key for user
+  ansible.builtin.include_tasks:
+    file: install_ssh_key_for_user
+
+- name: disable root user login
+  ansible.builtin.include_tasks:
+    file: disable_root_user_login

@@ -1,0 +1,21 @@
+---
+- name: Create non-root user
+  user:
+    name: "{{new_user}}"
+    state: present
+    createhome: yes
+
+- name: Set password
+  ansible.builtin.shadow:
+    name: "{{new_user}}"
+    password: "{{ new_password }}"
+
+- name: Configure SSH access for non-root user
+  become_user: "{{new_user}}"
+  ansible.builtin.lineinfile:
+    path: /home/{{new_user}}/.ssh/authorized_keys
+    create: yes
+    line: "{{ lookup('file', 'keys/key.pub') }}"
+    owner: "{{new_user}}"
+    group: "{{new_user}}"
+    mode: '0600'
