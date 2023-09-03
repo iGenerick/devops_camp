@@ -1,21 +1,15 @@
 ---
 - name: Create non-root user
+  become: yes
   user:
     name: "{{new_user}}"
+    password: "{{ new_password | password_hash }}"
     state: present
     createhome: yes
 
-- name: Set password
-  ansible.builtin.shadow:
-    name: "{{new_user}}"
-    password: "{{ new_password }}"
-
 - name: Configure SSH access for non-root user
-  become_user: "{{new_user}}"
-  ansible.builtin.lineinfile:
-    path: /home/{{new_user}}/.ssh/authorized_keys
-    create: yes
-    line: "{{ lookup('file', 'keys/key.pub') }}"
-    owner: "{{new_user}}"
-    group: "{{new_user}}"
-    mode: '0600'
+  ansible.posix.authorized_key:
+    user: "{{new_user}}"
+    state: present
+    key: "{{ lookup('file', 'keys/key.pub') }}"
+  become: yes
