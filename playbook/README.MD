@@ -32,4 +32,6 @@ $ второй с использованием ansible-vault
 
 ```ansible-playbook -e @vault --ask-vault-pass -i hosts playbook.yml --ssh-extra-args='-o StrictHostKeyChecking=no'```
 
-в "боевом" окружении лучше предварительно получить ssh fingerprint целевых хоста(-ов), тогда опцию ```--ssh-extra-args='-o StrictHostKeyChecking=no'```  можно будет не указывать и настроить ssh-key для работы ansible (ключи можно указать при развертывании системы).
+после запуска команды будет выведен запрос пароля от хранилища vault. В тестовых целях пароль: ```password```
+
+в "боевом" окружении лучше задать свой пароль на хранилище, предварительно получить ssh fingerprint целевых хоста(-ов), тогда опцию ```--ssh-extra-args='-o StrictHostKeyChecking=no'```  можно будет не указывать и настроить ssh-key для работы ansible (ключи можно указать при развертывании систем (-ы)).
