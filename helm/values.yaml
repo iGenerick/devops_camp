@@ -1,0 +1,5 @@
+---
+imageName: "localhost:5001/webserver"
+imageTag: latest
+replicaCount: 3
+author: "Сергей Андреевич Н."
